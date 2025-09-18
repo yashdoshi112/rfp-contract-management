@@ -1,0 +1,85 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  BUYER
+  SUPPLIER
+}
+
+enum RFPStatus {
+  DRAFT
+  PUBLISHED
+  RESPONSE_SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum ResponseStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role
+  createdAt    DateTime @default(now())
+
+  rfps         RFP[]    @relation("BuyerRFPs")
+  responses    Response[]
+}
+
+model RFP {
+  id            String     @id @default(cuid())
+  title         String
+  description   String
+  dueDate       DateTime?
+  status        RFPStatus  @default(DRAFT)
+  attachmentKey String?
+  version       Int        @default(1)
+  buyerId       String
+  buyer         User       @relation("BuyerRFPs", fields: [buyerId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  versions      RFPVersion[]
+  responses     Response[]
+}
+
+model RFPVersion {
+  id            String   @id @default(cuid())
+  rfpId         String
+  rfp           RFP      @relation(fields: [rfpId], references: [id], onDelete: Cascade)
+  version       Int
+  title         String
+  description   String
+  attachmentKey String?
+  createdAt     DateTime @default(now())
+
+  @@unique([rfpId, version])
+}
+
+model Response {
+  id            String         @id @default(cuid())
+  rfpId         String
+  rfp           RFP            @relation(fields: [rfpId], references: [id], onDelete: Cascade)
+  supplierId    String
+  supplier      User           @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  message       String
+  attachmentKey String?
+  status        ResponseStatus @default(SUBMITTED)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
