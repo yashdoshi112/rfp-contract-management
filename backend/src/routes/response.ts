@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
-import { requireAuth, requireRole } from '../auth/middleware';
-import { upload } from '../upload';
-import prisma from '../prisma';
-import { notifyBuyerResponse } from '../notifier';
-import { markRFPResponseSubmitted } from './rfp.controller';
+import { requireAuth, requireRole } from '../auth/middleware'.js'.js";
+import { upload } from '../upload'.js'.js";
+import prisma from '../prisma'.js'.js";
+import { notifyBuyerResponse } from '../notifier'.js'.js";
+import { markRFPResponseSubmitted } from './rfp.controller'.js'.js";
 import { z } from 'zod';
 
 export const responseRouter = Router();
