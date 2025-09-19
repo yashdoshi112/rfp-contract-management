@@ -1,7 +1,11 @@
 import { Router } from 'express';
-import { requireAuth, requireRole } from '.js'.js'.js";
-import { createRFP, publishRFP, getMyRFPs, listPublished, getRFP, updateRFP, markUnderReview, approveRFP, rejectRFP, listResponsesForBuyer } from '.js'.js'.js";
-import { upload } from '.js'.js'.js";
+import { requireAuth, requireRole } from '../auth/middleware.js';
+import {
+  createRFP, publishRFP, getMyRFPs, listPublished, getRFP,
+  updateRFP, markUnderReview, approveRFP, rejectRFP, listResponsesForBuyer
+} from './rfp.controller.js';
+import { upload } from '../upload.js';
+
 
 export const rfpRouter = Router();
 

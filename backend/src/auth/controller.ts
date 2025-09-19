@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import prisma from '.js'.js'.js";
-import { Request, Response } from 'express';
+import prisma from '../prisma.js';
+
 
 const registerSchema = z.object({
   email: z.string().email(),

@@ -1,4 +1,5 @@
-import { prisma } from '.js'.js'.js";
+import prisma from './prisma.js';
+
 
 export async function searchRFPs(query: string) {
   const q = query.trim();

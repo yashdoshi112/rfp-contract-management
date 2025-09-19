@@ -1,8 +1,9 @@
-import { Request, Response } from 'express'
-import prisma from '.js'.js'.js"
-import { z } from 'zod'
-import { notifyBuyerResponse, notifySupplierStatusChange, notifySuppliersNewRFP } from '.js'.js'.js"
-import { searchRFPs } from '.js'.js'.js"
+import { Request, Response } from 'express';
+import prisma from '../prisma.js';
+import { z } from 'zod';
+import { notifyBuyerResponse, notifySupplierStatusChange, notifySuppliersNewRFP } from '../notifier.js';
+import { searchRFPs } from '../search.js';
+
 
 const rfpSchema = z.object({
   title: z.string().min(3),

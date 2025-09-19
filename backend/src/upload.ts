@@ -1,7 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
-import { config } from '.js'.js'.js";
+import { config } from './config.js';
+
 
 const dir = config.uploadDir;
 if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });

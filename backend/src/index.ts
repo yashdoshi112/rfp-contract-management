@@ -7,11 +7,11 @@ import http from 'http';
 import { Server } from 'socket.io';
 import path from 'path';
 
-import { prisma } from '.js'.js'.js";
-import { authRouter } from '.js'.js'.js";
-import { rfpRouter } from '.js'.js'.js";
-import { responseRouter } from '.js'.js'.js";
-import { setupSwagger } from '.js'.js'.js";
+import prisma from './prisma.js';
+import { authRouter } from './routes/auth.js';
+import { rfpRouter } from './routes/rfp.js';
+import { responseRouter } from './routes/response.js';
+import { setupSwagger } from './swagger.js';
 
 const app = express();
 const server = http.createServer(app);
