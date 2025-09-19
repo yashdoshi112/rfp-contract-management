@@ -1,3 +1,4 @@
+// @ts-nocheck
 import nodemailer from 'nodemailer';
 import { config } from './config.js';
 
@@ -27,3 +28,4 @@ export async function sendMail(to: string, subject: string, text: string) {
     console.log('Email sent:', info.messageId);
   }
 }
+

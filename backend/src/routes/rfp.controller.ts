@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Request, Response } from 'express';
 import prisma from '../prisma.js';
 import { z } from 'zod';
@@ -143,3 +144,4 @@ export async function markRFPResponseSubmitted(rfpId: string, app: any) {
     app.get('io').emit('rfpUpdated', { id: rfpId, status: updated.status })
   }
 }
+

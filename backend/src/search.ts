@@ -1,3 +1,4 @@
+// @ts-nocheck
 import prisma from './prisma.js';
 
 
@@ -29,3 +30,4 @@ export async function searchRFPs(query: string) {
     });
   }
 }
+

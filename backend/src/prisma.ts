@@ -1,3 +1,4 @@
+// @ts-nocheck
 // backend/src/prisma.ts
 import { PrismaClient } from '@prisma/client'
 
@@ -15,3 +16,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default prisma
+

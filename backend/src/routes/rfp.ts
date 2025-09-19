@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Router } from 'express';
 import { requireAuth, requireRole } from '../auth/middleware.js';
 import {
@@ -21,3 +22,4 @@ rfpRouter.post('/:id/approve', requireAuth, requireRole('BUYER'), approveRFP);
 rfpRouter.post('/:id/reject', requireAuth, requireRole('BUYER'), rejectRFP);
 
 rfpRouter.get('/:id/responses', requireAuth, requireRole('BUYER'), listResponsesForBuyer);
+

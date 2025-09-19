@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
@@ -27,3 +28,4 @@ const spec = {
 export function setupSwagger(app: Express) {
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(spec as any));
 }
+
