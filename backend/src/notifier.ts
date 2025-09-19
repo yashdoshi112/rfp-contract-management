@@ -5,12 +5,12 @@ export async function notifySuppliersNewRFP(rfpId: string) {
   const rfp = await prisma.rFP.findUnique({ where: { id: rfpId }, include: { buyer: true } });
   if (!rfp) return;
 
-  const suppliers = await prisma.user.findMany({ where: { role: 'SUPPLIER' } });
-  await Promise.all(suppliers.map(s => sendMail(
-    s.email,
-    `New RFP Published: ${rfp.title}`,
-    `A new RFP "${rfp.title}" has been published by ${rfp.buyer.name}.`
-  )));
+const suppliers = await prisma.user.findMany({ where: { role: 'SUPPLIER' } });
+await Promise.all(
+  suppliers.map((s: { email: string }) =>
+    sendMail(s.email, `New RFP Published: ${rfp.title}`, `A new RFP "${rfp.title}" has been published by ${rfp.buyer.name}.`)
+  )
+);
 }
 
 export async function notifyBuyerResponse(rfpId: string) {
