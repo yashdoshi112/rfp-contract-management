@@ -1,11 +1,28 @@
-# backend/Dockerfile
-FROM node:18-slim
+FROM node:20-slim
 WORKDIR /app
-COPY package.json pnpm-lock.yaml* package-lock.json* yarn.lock* ./
-RUN if [ -f pnpm-lock.yaml ]; then corepack enable && corepack prepare pnpm@latest --activate && pnpm i --frozen-lockfile; \
-    elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-    else npm i --omit=dev; fi
+
+# Install deps (including devDeps so prisma/tsc exist)
+COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
+RUN if [ -f pnpm-lock.yaml ]; then \
+      corepack enable && corepack prepare pnpm@9 --activate && pnpm install --frozen-lockfile; \
+    elif [ -f yarn.lock ]; then \
+      yarn install --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then \
+      npm ci; \
+    else \
+      npm install; \
+    fi
+
+# Copy source
 COPY . .
-RUN npx prisma generate && npm run build || pnpm build || yarn build
+
+# Generate Prisma client and build
+RUN npx prisma generate
+RUN npm run build || pnpm build || yarn build
+
+# Small entry to run DB migrations each start
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
 EXPOSE 4000
-CMD ["node", "dist/index.js"]
+CMD ["sh", "/app/start.sh"]
