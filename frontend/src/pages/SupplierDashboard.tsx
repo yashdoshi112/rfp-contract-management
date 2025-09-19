@@ -17,9 +17,9 @@ export default function SupplierDashboard() {
   useEffect(() => { load() }, [])
 
   useEffect(() => {
-    const socket = io(location.origin.replace('5173','4000'))
+    const socket = io(location.origin.replace('5173', '4000'))
     socket.on('rfpUpdated', () => load(search))
-    return () => socket.disconnect()
+    return () => { socket.disconnect(); } // return void
   }, [search])
 
   return (
