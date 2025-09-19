@@ -1,5 +1,5 @@
-import { prisma } from './prisma'.js'.js";
-import { sendMail } from './mailer'.js'.js";
+import { prisma } from '.js'.js'.js";
+import { sendMail } from '.js'.js'.js";
 
 export async function notifySuppliersNewRFP(rfpId: string) {
   const rfp = await prisma.rFP.findUnique({ where: { id: rfpId }, include: { buyer: true } });

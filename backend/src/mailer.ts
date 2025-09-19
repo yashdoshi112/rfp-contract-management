@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { config } from './config'.js'.js";
+import { config } from '.js'.js'.js";
 
 let transporter: nodemailer.Transporter;
 
